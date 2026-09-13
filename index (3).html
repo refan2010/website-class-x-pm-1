@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X Pemasaran 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top: #5FB8F5;
+    --sky-bottom: #8FD3FF;
+    --cloud: #FFFFFF;
+    --wood: #C97B3D;
+    --red: #E8483B;
+    --yellow: #FFC93C;
+    --green: #3DAA6B;
+    --purple: #7B5EA7;
+    --ink: #2B2118;
+    --muted: #6B5D4F;
+    --paper: #FFFBF2;
+    --line: #EADFC8;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, .bubble{
+    font-family: 'Baloo 2', sans-serif;
+    margin: 0;
+  }
+
+  .wrap{
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  a{ color: inherit; }
+
+  /* ---------- HERO ---------- */
+
+  .hero{
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom));
+    padding-bottom: 60px;
+  }
+
+  .cloud{
+    position: absolute;
+    background: var(--cloud);
+    border-radius: 100px;
+    opacity: 0.9;
+  }
+  .cloud::before, .cloud::after{
+    content:'';
+    position:absolute;
+    background: var(--cloud);
+    border-radius: 100px;
+  }
+  .c1{ width:120px; height:40px; top:40px; left:6%; }
+  .c1::before{ width:60px; height:60px; top:-30px; left:10px; }
+  .c1::after{ width:44px; height:44px; top:-20px; left:60px; }
+
+  .c2{ width:90px; height:32px; top:110px; right:10%; }
+  .c2::before{ width:46px; height:46px; top:-22px; left:8px; }
+  .c2::after{ width:34px; height:34px; top:-16px; left:48px; }
+
+  .c3{ width:70px; height:26px; top:20px; right:26%; opacity:0.7; }
+  .c3::before{ width:36px; height:36px; top:-16px; left:6px; }
+  .c3::after{ width:26px; height:26px; top:-10px; left:36px; }
+
+  .star{
+    position:absolute;
+    font-size: 18px;
+    color: var(--yellow);
+    filter: drop-shadow(0 1px 0 rgba(0,0,0,0.08));
+  }
+
+  .rocket{
+    position: absolute;
+    right: 8%;
+    top: 60px;
+    font-size: 44px;
+    transform: rotate(35deg);
+  }
+
+  .hero-top{
+    position: relative;
+    z-index: 2;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 26px 0 0;
+  }
+
+  .hero-top .tag{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    background: rgba(0,0,0,0.15);
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  .hero-top .tahun{
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    font-weight: 600;
+  }
+
+  .hero-body{
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 60px 0 0;
+  }
+
+  .hero-body h1{
+    font-weight: 800;
+    font-size: clamp(40px, 9vw, 78px);
+    color: #fff;
+    text-shadow: 0 4px 0 rgba(0,0,0,0.12);
+    letter-spacing: 0.01em;
+  }
+
+  .hero-body h1 span{
+    color: var(--yellow);
+    -webkit-text-stroke: 2px var(--ink);
+  }
+
+  .hero-sub{
+    max-width: 480px;
+    margin: 18px auto 0;
+    color: rgba(255,255,255,0.95);
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .chips{
+    display:flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 34px;
+  }
+
+  .chip{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 16px;
+    box-shadow: 0 5px 0 rgba(0,0,0,0.18);
+  }
+  .chip small{
+    display:block;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    opacity: 0.85;
+    margin-bottom: 2px;
+  }
+  .chip.red{ background: var(--red); }
+  .chip.green{ background: var(--green); }
+
+  .wave{
+    display:block;
+    width: 100%;
+    height: 60px;
+    margin-top: 40px;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+
+  section.block{
+    padding: 60px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    background: var(--purple);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  section.block h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  section.block p.desc{
+    color: var(--muted);
+    max-width: 540px;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  /* ---------- GALLERY (photo shelf) ---------- */
+
+  .shelf{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    margin-top: 34px;
+    justify-content: center;
+  }
+
+  .polaroid{
+    background: #fff;
+    padding: 10px 10px 34px;
+    width: 150px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    position: relative;
+  }
+  .polaroid:nth-child(odd){ transform: rotate(-4deg); }
+  .polaroid:nth-child(even){ transform: rotate(3deg); }
+
+  .polaroid .frame{
+    height: 110px;
+    background: repeating-linear-gradient(135deg, #E9F4FF 0 8px, #DCEBFC 8px 16px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 24px;
+  }
+
+  .polaroid .cap{
+    position:absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    text-align:center;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .polaroid .pin{
+    position:absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+  }
+
+  .empty-note{
+    display:flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 26px;
+    padding: 16px 20px;
+    background: #fff;
+    border: 2px dashed var(--line);
+    border-radius: 14px;
+    max-width: 560px;
+  }
+  .empty-note span{ font-weight: 700; color: var(--muted); font-size: 14px; }
+
+  /* ---------- JADWAL ---------- */
+
+  .days{
+    display:flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+  }
+
+  .day-block{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+  }
+  .day-block:nth-child(1){ background: var(--red); }
+  .day-block:nth-child(2){ background: var(--yellow); color:var(--ink); box-shadow: 0 4px 0 rgba(0,0,0,0.12); }
+  .day-block:nth-child(3){ background: var(--green); }
+  .day-block:nth-child(4){ background: #4FA8E8; }
+  .day-block:nth-child(5){ background: var(--purple); }
+  .day-block:nth-child(6){ background: var(--wood); }
+
+  .day-cards{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-top: 26px;
+  }
+
+  .day-card{
+    background:#fff;
+    border-radius: 14px;
+    overflow:hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  }
+
+  .day-card .head{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    color:#fff;
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  .day-card .head.red{ background: var(--red); }
+  .day-card .head.yellow{ background: var(--yellow); color: var(--ink); }
+  .day-card .head.green{ background: var(--green); }
+  .day-card .head.blue{ background: #4FA8E8; }
+  .day-card .head.purple{ background: var(--purple); }
+
+  .day-card ul{
+    list-style:none;
+    margin:0;
+    padding: 12px 14px;
+    display:flex;
+    flex-direction:column;
+    gap: 8px;
+  }
+  .day-card li{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 8px;
+  }
+  .day-card li:last-child{ border-bottom:none; padding-bottom:0; }
+
+  table.jadwal{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 22px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  }
+
+  table.jadwal th, table.jadwal td{
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  table.jadwal th{
+    font-family: 'Baloo 2', sans-serif;
+    background: #FFF3DC;
+    color: var(--ink);
+  }
+
+  table.jadwal td.muted{ color: var(--muted); font-weight: 600; }
+
+  /* ---------- PR ---------- */
+
+  .pr-list{
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pr-card{
+    display:flex;
+    gap: 14px;
+    align-items:flex-start;
+    background:#fff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+  }
+
+  .pr-card .icon{
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--yellow);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    flex-shrink:0;
+  }
+
+  .pr-card .txt strong{
+    display:block;
+    font-family:'Baloo 2', sans-serif;
+    font-size: 15px;
+  }
+  .pr-card .txt span{
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* ---------- SOSMED ---------- */
+
+  .sosmed{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 26px;
+  }
+
+  .soc-btn{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 40px;
+    color:#fff;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size: 14px;
+    text-decoration:none;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+  }
+  .soc-btn .dot{
+    width:22px; height:22px; border-radius:50%;
+    background: rgba(255,255,255,0.3);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 12px;
+  }
+  .soc-ig{ background: linear-gradient(135deg,#E8483B,#7B5EA7); }
+  .soc-yt{ background: var(--red); }
+  .soc-tt{ background: var(--ink); }
+  .soc-wa{ background: var(--green); }
+
+  footer{
+    background: linear-gradient(180deg, var(--sky-bottom), var(--sky-top));
+    color: #fff;
+    padding: 30px 0;
+    text-align:center;
+  }
+  footer .wrap{
+    display:flex;
+    justify-content: space-between;
+    font-family:'Baloo 2', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  @media (max-width: 600px){
+    footer .wrap{ flex-direction: column; gap: 6px; text-align:center; }
+    table.jadwal{ font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="star" style="top:70px; left:20%;">★</div>
+  <div class="star" style="top:150px; left:42%; font-size:12px;">★</div>
+  <div class="star" style="top:90px; right:32%; font-size:14px;">★</div>
+  <div class="rocket">🚀</div>
+
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="tag">Profil Kelas</div>
+      <div class="tahun">Tahun Ajaran 2026/2027</div>
+    </div>
+
+    <div class="hero-body">
+      <h1>X Pemasaran <span>1</span></h1>
+      <p class="hero-sub">Ruang petualangan digital kelas X Pemasaran 1 — profil, dokumentasi, jadwal, tugas, sampai media sosial, semua ada di sini!</p>
+
+      <div class="chips">
+        <div class="chip red"><small>Wali Kelas</small>Bu Resi</div>
+        <div class="chip green"><small>Jumlah Siswa</small>32 Orang</div>
+      </div>
+    </div>
+
+    <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none">
+      <path d="M0,30 C 240,60 480,0 720,20 C 960,40 1200,10 1440,30 L1440,60 L0,60 Z" fill="#FFFBF2"/>
+    </svg>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">📸 Dokumentasi</div>
+    <h2>Foto &amp; video kegiatan</h2>
+    <p class="desc">Rak kenangan kelas X Pemasaran 1 — kumpulan momen belajar, praktik, dan acara seru bareng teman-teman.</p>
+
+    <div class="shelf" aria-hidden="true">
+      <div class="polaroid"><div class="pin"></div><div class="frame">🖼️</div><div class="cap">Foto</div></div>
+      <div class="polaroid"><div class="pin"></div><div class="frame">🎬</div><div class="cap">Video</div></div>
+      <div class="polaroid"><div class="pin"></div><div class="frame">🖼️</div><div class="cap">Foto</div></div>
+      <div class="polaroid"><div class="pin"></div><div class="frame">🖼️</div><div class="cap">Foto</div></div>
+      <div class="polaroid"><div class="pin"></div><div class="frame">🎬</div><div class="cap">Video</div></div>
+    </div>
+
+    <div class="empty-note">
+      <span>🧸 Foto dan video asli belum ditambahkan — kirim filenya untuk mengisi rak ini</span>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">🗓️ Jadwal</div>
+    <h2>Jadwal pelajaran</h2>
+    <p class="desc">Susunan mata pelajaran kelas X Pemasaran 1 dari Senin sampai Jumat, pulang jam 12.30.</p>
+
+    <div class="day-cards">
+      <div class="day-card"><div class="head red">Senin</div><ul><li>—</li><li>—</li><li>—</li></ul></div>
+      <div class="day-card"><div class="head yellow">Selasa</div><ul><li>—</li><li>—</li><li>—</li></ul></div>
+      <div class="day-card"><div class="head green">Rabu</div><ul><li>—</li><li>—</li><li>—</li></ul></div>
+      <div class="day-card"><div class="head blue">Kamis</div><ul><li>—</li><li>—</li><li>—</li></ul></div>
+      <div class="day-card"><div class="head purple">Jumat</div><ul><li>—</li><li>—</li><li>—</li></ul></div>
+    </div>
+
+    <div class="empty-note">
+      <span>🧸 Daftar mata pelajaran belum diisi — kirim datanya biar aku lengkapi tiap hari</span>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">📝 Tugas</div>
+    <h2>Info pekerjaan rumah</h2>
+    <p class="desc">Daftar PR dan tugas kelas biar nggak ada yang ketinggalan.</p>
+
+    <div class="pr-list">
+      <div class="pr-card">
+        <div class="icon">✏️</div>
+        <div class="txt">
+          <strong>Belum ada tugas ditambahkan</strong>
+          <span>Kirim info PR (mapel, deskripsi, batas waktu) untuk ditampilkan di sini</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="eyebrow">🌐 Terhubung</div>
+    <h2>Media sosial kelas</h2>
+    <p class="desc">Ikuti akun kelas X Pemasaran 1 biar nggak ketinggalan info dan momen seru.</p>
+
+    <div class="sosmed">
+      <a class="soc-btn soc-ig" href="#"><span class="dot">IG</span>Instagram</a>
+      <a class="soc-btn soc-wa" href="#"><span class="dot">💬</span>Saluran WhatsApp</a>
+    </div>
+
+    <div class="empty-note">
+      <span>🧸 Tautan media sosial masih placeholder — kirim link akunnya biar aku pasang</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>🚀 X Pemasaran 1</div>
+    <div>Wali Kelas: Bu Resi</div>
+  </div>
+</footer>
+
+</body>
+</html>
